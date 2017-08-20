@@ -1,0 +1,3 @@
+﻿<ng-template ngFor [ngForOf]="parts" let-part let-isOdd="odd">
+    <span *ngIf="isOdd" class="{{highlightClass}}">{{part}}</span><ng-template [ngIf]="!isOdd">{{part}}</ng-template>
+</ng-template>

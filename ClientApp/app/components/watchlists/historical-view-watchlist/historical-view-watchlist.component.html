@@ -1,0 +1,97 @@
+﻿<p *ngIf="!ready"><em>Loading...</em></p>
+<div id="div_main_View" class="container-fluid" *ngIf="ready">
+    <div>
+        <div width=100%>
+            <div id="divHeader1">
+                <div>
+                    <label>Watchlists:</label>
+                    <select name="Watchlists" id="singleWatchlistSelect" [ngModel]="selectedWatchlistName" (ngModelChange)="changeWatchlist($event)">
+                        <option *ngFor="let watchlist of watchlists" [ngValue]="watchlist">{{watchlist}}</option>
+                    </select>
+                    <md-spinner *ngIf="!stopSpinner" class="spinner" [color]="'primary'" [strokeWidth]="6">
+                    </md-spinner>
+                </div>
+                <div>
+                    <label>Date:</label>
+                    <input id="quotedate" type="date" [ngModel]="quotedate" (ngModelChange)="changeQuotedate($event)">
+                </div>
+                <div>
+                    <label>Table Size:</label>
+                    <input id="tableFontSize" type="number" [ngModel]="fontSize" min="1" max="40" (ngModelChange)="changeFontSize($event)">
+                </div>
+            </div>
+            <div id="divHeader2">
+                <current-datetime [delay]="5000" id="dateTime"></current-datetime>
+            </div>
+        </div>
+
+        <table id="table_watchlist" class="table-striped" mdSort (mdSortChange)="sortData($event)">
+
+            <thead id="thead_quotes">
+                <tr [ngStyle]="{'background-color':'#d3d3d3', 'font-weight':'bold', 'font-size': getFontSize() + 'px'}">
+                    <td id="td_quotes" align="left" md-sort-header="symbol">
+                        <a href="javascript:void(0)">Symbol &nbsp;</a>
+                        <input type="search" name="search" placeholder="Filter By Symbol" size=14 [(ngModel)]="filterBy">
+                    </td>
+                    <!--<td id="td_quotes" align="right"  md-sort-header="lastTradePrice">Price$</td>
+                    <td id="td_quotes" align="right">DateTime</td>
+
+                    <td id="td_quotes" align="right">change</td>
+                    <td id="td_quotes" align="right">ChangeInPercent</td>
+                    <td id="td_quotes" align="right">Volume</td>
+                    <td id="td_quotes" align="right">lastTradeDate</td>
+                    <td id="td_quotes" align="right" md-sort-header="open" #open>Open</td>
+                    <td id="td_quotes" align="right">dailyHigh</td>
+                    <td id="td_quotes" align="right">dailyLow</td>
+                    <td id="td_quotes" align="right">ask</td>
+                    <td id="td_quotes" align="right">bid </td>
+                    <td id="td_quotes" align="right" md-sort-header="previousClose" #previousClose>PreviousClose</td>-->
+                    <!---->
+                    <td id="td_quotes" *ngFor="let column of columns" align="{{column.align}}" md-sort-header="{{column.prop}}">
+                        <a href="javascript:void(0)">{{column.name}}</a>
+                    </td>
+                </tr>
+            </thead>
+
+            <tbody id="tbody_quotes">
+                <tr id="tr_quotes" *ngFor="let item of (watchlist?.quotes | symbolFilter: filterBy)" [style.font-size.px]="getFontSize()">
+                    <!--[ngStyle]="{'font-size':getFontSize()+'px'}"-->
+                    <!--[style.font-size]="getFontSize() + 'px'"-->
+                    
+                    <td id="td_quotes" align="left">
+                        <span [innerHTML]="getTradingDirectionSymbol(item)" [style.color]="getTradingDirectionColor(item)"></span>{{item.symbol}}
+                    </td>
+                    <!--<td id="td_quotes" align="right">{{item.lastTradePrice | number:'1.2-3'}}</td>
+                    <td id="td_quotes" align="right">{{item.lastUpdate | date:'dd-MM-yyyy HH:mm:ss'}}</td>
+                    
+                    <td id="td_quotes" align="right">{{item.change | number}}</td>
+                    <td id="td_quotes" align="right">{{item.changeInPercent/100 | percent:'1.2-5'}}</td>
+                    <td id="td_quotes" align="right">{{item.volume | number}}</td>
+                    <td id="td_quotes" align="right">{{item.lastTradeDate | date:'dd-MM-yyyy HH:mm:ss'}}</td>
+                    <td id="td_quotes" align="right">{{item.open | number}}</td>
+                    <td id="td_quotes" align="right">{{item.dailyHigh | number}}</td>
+                    <td id="td_quotes" align="right">{{item.dailyLow | number}}</td>
+                    <td id="td_quotes" align="right">{{item.ask| number}}</td>
+                    <td id="td_quotes" align="right">{{item.bid| number}}</td>
+                    <td id="td_quotes" align="right">{{item.previousClose | number}}</td>-->
+                    <td id="td_quotes" *ngFor="let column of columns" align="{{column.align}}" [style.color]="getTradingColor(column, item)">{{item[column.prop] | processChainFilter:column.filter}}
+                    </td>
+                </tr>
+
+            </tbody>
+
+            <tfoot>
+                <tr ng-style="{'border':'1px solid black'}">
+                    <td align="left">
+                        <button type="reset" (click)="OnDeleteWatchlist(selectedWatchlistName)">Delete</button>
+                        <button (click)="OnEditWatchlist(selectedWatchlistName)">Edit</button>
+                    </td>
+                    <td align="right" colspan="12">
+                        
+                    </td>
+                </tr>
+            </tfoot>
+
+        </table>
+    </div>
+</div>

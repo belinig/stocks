@@ -1,0 +1,40 @@
+﻿<div md-dialog-title>
+    <h6 class="modal-title">Find Code</h6>
+    <button type="button" class="close" md-dialog-close (click)="cancel()">&times;</button>
+</div>
+<div md-dialog-content>
+    <div class="actions-header">
+        <label>Stock Code or Name:</label>
+        <input type="text" [(ngModel)]="stockCodeName" min="1" max="40" style="width:90px">
+        <button class="btn btn-primary" (click)="findASXStock(stockCodeName)">Find</button>
+        <button class="btn btn-default" [style.float]="'right'" (click)="save(stockCodeName)">Ok</button>
+    </div>
+    <div class="stocks-tb-container">
+        <table id="table_astocks" class="table-striped">
+            <thead id="thead_astocks">
+                <tr id="tr_astocks">
+                    <!--ng-class="{ active: user.id == activeId }"-->
+                    <td id="td_astocks" align="right" (click)="sortBy('Code')" ngClass="applyArrowClass('Code')"><a href="javascript:void(0)">Code</a></td>
+                    <td id="td_astocks" align="right" (click)="sortBy('Name')" ngClass="applyArrowClass('Name')"><a href="javascript:void(0)">Name</a></td>
+                    <td id="td_astocks" align="right" (click)="sortBy('Industry')" ngClass="applyArrowClass('Industry')"><a href="javascript:void(0)">Industry</a></td>
+                </tr>
+            </thead>
+            <tbody id="tbody_astocks">
+                <!--<tr id="tr_astocks" dir-paginate="item in astocks | filter:q | itemsPerPage: pageSize" current-page="currentPage" ng-click="selectStock(item)">-->
+
+                <tr id="tr_astocks" *ngFor="let item of pageData" (click)="selectStock($event)">
+                    <td id="td_astocks" align="left">{{item.code}}</td>
+                    <td id="td_astocks" align="right">{{item.name}}</td>
+                    <td id="td_astocks" align="right">{{item.industryGroup}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div md-dialog-actions>
+    <md-paginator [length]="length"
+                    [pageSize]="pageSize"
+                    [pageSizeOptions]="pageSizeOptions"
+                    (page)="onPageEvent($event)">
+    </md-paginator>
+</div>

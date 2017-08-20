@@ -1,0 +1,23 @@
+<div class='container-fluid'>
+    <div class="row">
+        <a class="nav-link" routerLinkActive="active" routerLink="profile">
+            <i class="fa fa-user"></i> {{(authState$ | async)?.user?.username}}
+        </a>
+    </div>
+    <div class="row" *ngIf="(authState$ | async)?.user?.loggedIn">
+        <a class="nav-link" routerLinkActive="active" routerLink="profile">
+            <i class="fa fa-user"></i> {{(authState$ | async)?.user?.username}}
+        </a>
+    </div>
+    <div class='row'>
+        <div class='col-sm-3'>
+            Hello User
+        </div>
+        <div class='col-sm-3'>
+            <nav-menu></nav-menu>
+        </div>
+        <div class='col-sm-9 body-content'>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

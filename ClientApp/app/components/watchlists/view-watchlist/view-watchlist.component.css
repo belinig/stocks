@@ -1,0 +1,69 @@
+#div_main_View {
+    padding-top: 10px;
+    width: 95%;
+}
+
+#divHeader1 div {
+    float: left;
+    height: initial;
+    margin: 0 2em 0 0em;
+}
+
+#divHeader1 div select, input {
+    height: 26px;
+}
+
+#divHeader1 .spinner {
+    margin: 0 1px;
+    height: 26px;
+}
+
+#divHeader2 div {
+    float: right;
+    margin: 0 2em 0 0em;
+}
+
+#tableFontSize {
+    font-size: 10pt;
+    margin: 0 2em 0 0em;
+    width: 45px;
+}
+
+#dateTime {
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+    float: right;
+}
+
+#table_watchlist {
+    border-collapse: collapse;
+    border: 3px solid black;
+    width: 100%;
+    margin: auto;
+}
+
+#thead_quotes {
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+#tbody_quotes {
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+#tr_quotes {
+    font-weight: bold;
+    color: black;
+    background-size: 40px 40px;
+    background-image: repeating-linear-gradient(0deg, #fff, #fff 1px, transparent 1px, transparent 40px),repeating-linear-gradient(-90deg, #fff, #fff 1px, transparent 1px, transparent 40px);
+}
+
+#td_quotes {
+    border: 0.5px solid #ddd;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
+}

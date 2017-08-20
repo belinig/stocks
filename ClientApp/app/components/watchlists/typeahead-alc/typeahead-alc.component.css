@@ -1,0 +1,23 @@
+.form-control {
+    width: 100px;
+}
+
+:host /deep/ .dropdown-item {
+    width: 100%;
+}
+
+    :host /deep/ .dropdown-item .symbol {
+        width: 100%;
+        text-align:left;
+        font-size: 10px;
+        font-weight:700;
+    }
+    :host /deep/ .dropdown-item .subject {
+        width: 100%;
+        text-align: left;
+        font-size: 9px;
+        font-style: italic;
+    }
+        :host /deep/ .dropdown-item .subject::before {
+            content: '\00a0';
+        }

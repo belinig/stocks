@@ -1,0 +1,187 @@
+//header = title
+
+:host {
+    position: relative;
+    top: -20px;
+    height: auto;
+    padding:0px;
+    margin:0px;
+    //bottom: -20px;
+}
+
+.mat-dialog-title {
+    position: relative;
+    top: -20px;
+    margin-top: 0px;
+    padding: 0px;
+
+    .modal-title {
+        display: block;
+        float: left;
+        margin-right: 5px;
+        clear: left;
+        text-align: center;
+        height: 29px;
+        font-size: small;
+    }
+
+    .close {
+        float: right;
+        margin-right: 0;
+        clear: right;
+    }
+}
+
+//content
+
+//mixins
+.tr_astocks_common {
+    font-weight: bold;
+    color: black;
+    background-size: 40px 40px;
+    background-image: repeating-linear-gradient(0deg, #fff, #fff 1px, transparent 1px, transparent 40px),repeating-linear-gradient(-90deg, #fff, #fff 1px, transparent 1px, transparent 40px);
+}
+
+.td_astocks_common {
+    border-collapse: collapse;
+    border-spacing: 0px 0px;
+    font-family: Arial,Verdana,Helvetica,Sans-Serif;
+    font-style: normal;
+    font-variant: normal;
+    text-align: left;
+    text-decoration: none;
+    visibility: visible;
+}
+
+.td_astocks_header {
+    .td_astocks_common;
+    color: rgb(0, 120, 184);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 13.54px;
+    padding-left: 1px;
+}
+
+
+.td_astocks_body {
+    .td_astocks_common;
+    color: rgb(40, 40, 40);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14.77px;
+}
+
+
+
+
+.mat-dialog-content {
+    position: relative;
+    top: -20px;
+    width: 550px;
+    overflow: hidden;
+    height: auto;
+    max-height: 300px;
+    padding:0px;
+    margin:5px;
+
+    .actions-header {
+        tr.searchStockBlock {
+            display: inline-block;
+            height: 40px;
+            padding: 6px 7px 8px 9px;
+            margin: 2px 3px 4px 5px;
+        }
+
+        td:nth-child(1), td:nth-child(2) {
+            width: 150px
+        }
+    }
+
+    .stocks-tb-container {
+        overflow-y: auto;
+        max-height: 260px;
+        border: 1px solid #fcc;
+        font-size: smaller;
+        margin-top: 10px;
+
+        small {
+            color: #c99;
+        }
+
+        #table_astocks {
+            border-collapse: collapse;
+            border: 1px solid #fcc;
+            width: 100%;
+
+            #thead_astocks {
+                border: 1px solid black;
+
+                > #tr_astocks {
+                    .tr_astocks_common;
+
+                    td:nth-child(1)#td_astocks {
+                        width: 50px
+                    }
+
+                    td:nth-child(2)#td_astocks {
+                        width: 370px
+                    }
+
+                    td {
+                        text-align: left;
+                    }
+
+                    > #td_astocks {
+                        .td_astocks_header;
+                    }
+                }
+            }
+
+            #tbody_astocks {
+                border: 1px solid black;
+
+                > #tr_astocks {
+                    .tr_astocks_common;
+
+                    > #td_astocks {
+                        .td_astocks_body;
+                    }
+
+                    &:hover {
+                        cursor: pointer;
+                        background-color: #ffff99;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//footer - actions
+.mat-dialog-actions {
+    position: relative;
+    top: 20px;
+    overflow: hidden;
+    border: 1px solid #ccf;
+    padding: 1px;
+    margin: 0px auto 1px auto;
+    height: 35px;
+    font-size: smaller;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    small {
+        color: #99c;
+    }
+
+    .mat-paginator {
+        border: 1px solid black;
+        min-height: 30px;
+    }
+}
+
+
+
+
+

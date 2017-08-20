@@ -1,0 +1,91 @@
+﻿<div id="div_main_Edit" class="container-fluid">
+    <div ng-controller="editCtrl">
+
+        <div width=100%>
+            <div id="divHeader1">
+                <div>
+                    <label>Watchlists:</label>
+                    <select name="singleWatchlistSelect" [ngModel]="selectedWatchlist" (ngModelChange)="changeWatchlist($event)">
+                        <option *ngFor="let watchlist of watchlists;trackBy:watchlist?.name " [ngValue]="watchlist">{{watchlist?.name}}</option>
+                    </select>
+                    <button (click)="newWatchlistEdit()">New</button>
+                </div>
+                <div>
+                    <label>Table Size:</label><input id="tableFontSize" type="number" [ngModel]="fontSize" min="1" max="40" (ngModelChange)="changeFontSize($event)">
+                </div>
+            </div>
+            <div id="divHeader2">
+                <current-datetime [delay]="9000" id="dateTime"></current-datetime>
+            </div>
+        </div>
+
+        <table id="table_watchlist" class="table-striped">
+
+            <thead>
+                <tr>
+                    <td align="left">
+                        &nbsp;<input type="text" name="watchlistNameEdit" placeholder="{{watchlistEditName}}" size=14 [(ngModel)]="watchlistEditName">
+                    </td>
+                    <td align="left">
+                        <div class="input-group">
+                            <!--<input class="typeahead" type="text" typeahead-editable=true name="stockAddEdit" id="stockAddEdit" placeholder="Enter stock to Add" size=14>-->
+                            <ngbd-typeahead-alc [resetStockName]="newStockName" (onNewStockName)="onNewStockName($event)"></ngbd-typeahead-alc>
+                            <button class="btn pull-left" title="Add" (click)="addStock2WatchlistEdit(newStockName)">
+                                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                            </button>
+                            <button class="btn pull-left" title="SearchStockCode" (click)="searchStockCode(newStockName)">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </td>
+                    <td align="right">
+                        <div id="import-file" class="input-group">
+                            <div id="import-input">
+                                <input type="file" (change)="OnChangeFileInput($event)" accept=".csv" />
+                            </div>
+                            <button id="import-button" title="Import" (click)="importWatchlistEdit()">
+                                <span class="glyphicon glyphicon-import" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr [ngStyle]="{'background-color':'#d3d3d3', 'font-weight':'bold', 'font-size': getFontSize() + 'px'}">
+                    <td id="td_quotes" align="left">
+                        <a href="" (click)="setSortOrder('t')">Symbol &nbsp;</a>
+                        <input type="search" name="search" placeholder="Filter By Symbol" size=14 [(ngModel)]="filterBy"/>
+                    </td>
+                    <td id="td_quotes" align="left">Action</td>
+                    <td></td>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <!--| filterRemoved:this-->
+                <tr id="tr_quotes"  *ngFor="let item of (watchlist?.symbols | symbolFilter: filterBy)"
+                    [ngStyle]="{'font-size':getFontSize() + 'px'}">
+                    <td id="td_quotes" align="left" ng-style="{'font-size':getFontSize()}">{{item.symbol}}</td>
+                    <td id="td_quotes" align="left">
+                        <button (click)="removeStockFromWatchlistEdit(item)">Remove</button>
+                    </td>
+                    <td></td>
+                </tr>
+            </tbody>
+
+            <tfoot>
+                <tr ng-style="{'border':'1px solid black'}">
+                    <td align="left">
+                        <button type="reset" (click)="cancelWatchlistEdit()">Cancel</button>
+                    </td>
+                    <td> </td>
+                    <td align="right">
+                        <button (click)="saveWatchlistEdit()">Save</button>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        <div id="updateMsg" align="left" [ngStyle]="{'color':'red'}">{{notification}}</div>
+
+    </div>
+</div>
